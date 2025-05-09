@@ -14,11 +14,11 @@ const StatusBar: React.FC = () => {
         </div>
         
         <button 
-          className={`p-2 sm:p-3 ${theme === 'light' ? 'bg-gray-100' : 'bg-gray-700'} bg-opacity-40 rounded-full hover:bg-opacity-60 transition-colors`}
+          className={`p-2 sm:p-3 ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'} bg-opacity-40 rounded-full hover:bg-opacity-60 transition-colors`}
           aria-label="Settings"
           onClick={() => setIsSheetOpen(true)}
         >
-          <Settings className="w-6 h-6 sm:w-5 sm:h-5" />
+          <Settings className={`w-6 h-6 sm:w-5 sm:h-5 ${theme === 'light' ? 'text-gray-700' : 'text-white'}`} />
         </button>
       </div>
 
