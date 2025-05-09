@@ -58,14 +58,45 @@ const grades: Grade[] = [
       final: null
     },
     color: "blue-400"
+  },
+  {
+    name: "Filosofía Social",
+    average: 6.8,
+    grades: {
+      first: 7.1,
+      second: 6.6,
+      third: null,
+      final: null
+    },
+    color: "blue-300"
+  },
+  {
+    name: "Teoría de Lenguajes y Programación",
+    average: 5.5,
+    grades: {
+      first: 5.5,
+      second: 5.5,
+      third: null,
+      final: null
+    },
+    color: "red-500"
   }
 ];
 
 const GradesPage: React.FC = () => {
   const navigate = useNavigate();
-  const [view, setView] = useState<'list' | 'table'>('list');
+  const [view, setView] = useState<'list' | 'table'>('table');
   
   const overallAverage = (grades.reduce((acc, curr) => acc + curr.average, 0) / grades.length).toFixed(2);
+
+  const getGradeColor = (grade: number | null) => {
+    if (grade === null) return 'text-blue-500';
+    if (grade < 6.0) return 'text-red-500';
+    if (grade < 7.0) return 'text-gray-400';
+    if (grade < 8.0) return 'text-gray-200';
+    if (grade < 9.0) return 'text-blue-400';
+    return 'text-white';
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0f0513] to-[#120821] text-white p-6">
@@ -131,37 +162,83 @@ const GradesPage: React.FC = () => {
           </button>
         </div>
 
-        <div className="space-y-4">
-          {grades.map((subject, index) => (
-            <div key={index} className="bg-gray-800/50 rounded-2xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-semibold">{subject.name}</h3>
-                <span className={`text-2xl font-bold text-${subject.color}`}>
-                  {subject.average.toFixed(1)}
-                </span>
-              </div>
-              <div className={`h-1 bg-${subject.color}/30 rounded-full mb-4`}>
-                <div 
-                  className={`h-full bg-${subject.color} rounded-full`}
-                  style={{ width: `${(subject.average / 10) * 100}%` }}
-                ></div>
-              </div>
-              <div className="grid grid-cols-4 gap-4">
-                {['1er', '2do', '3er', 'Final'].map((period, i) => (
-                  <div key={i} className="bg-gray-900/50 rounded-xl p-3 text-center">
-                    <p className="text-sm text-gray-400 mb-1">{period}</p>
-                    <p className="text-lg font-bold">
-                      {i === 0 ? subject.grades.first :
-                       i === 1 ? subject.grades.second :
-                       i === 2 ? (subject.grades.third ?? 'N/A') :
-                       subject.grades.final ?? 'N/A'}
-                    </p>
-                  </div>
+        {view === 'table' ? (
+          <div className="bg-gray-800/50 rounded-2xl overflow-hidden">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-700/50">
+                  <th className="text-left p-4 text-gray-400">Materia</th>
+                  <th className="p-4 text-gray-400">1°</th>
+                  <th className="p-4 text-gray-400">2°</th>
+                  <th className="p-4 text-gray-400">3°</th>
+                  <th className="p-4 text-gray-400">Final</th>
+                  <th className="p-4 text-gray-400">Prom.</th>
+                </tr>
+              </thead>
+              <tbody>
+                {grades.map((subject, index) => (
+                  <tr key={index} className="border-b border-gray-700/50 last:border-0">
+                    <td className="p-4 text-left">
+                      {subject.name.length > 15 
+                        ? subject.name.substring(0, 15) + '...'
+                        : subject.name}
+                    </td>
+                    <td className={`p-4 text-center ${getGradeColor(subject.grades.first)}`}>
+                      {subject.grades.first.toFixed(1)}
+                    </td>
+                    <td className={`p-4 text-center ${getGradeColor(subject.grades.second)}`}>
+                      {subject.grades.second.toFixed(1)}
+                    </td>
+                    <td className="p-4 text-center text-red-500">N/A</td>
+                    <td className="p-4 text-center text-blue-500">N/A</td>
+                    <td className={`p-4 text-center font-bold ${getGradeColor(subject.average)}`}>
+                      {subject.average.toFixed(1)}
+                    </td>
+                  </tr>
                 ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {grades.map((subject, index) => (
+              <div key={index} className="bg-gray-800/50 rounded-2xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold">{subject.name}</h3>
+                  <span className={`text-2xl font-bold ${getGradeColor(subject.average)}`}>
+                    {subject.average.toFixed(1)}
+                  </span>
+                </div>
+                <div className={`h-1 bg-${subject.color}/30 rounded-full mb-4`}>
+                  <div 
+                    className={`h-full bg-${subject.color} rounded-full`}
+                    style={{ width: `${(subject.average / 10) * 100}%` }}
+                  ></div>
+                </div>
+                <div className="grid grid-cols-4 gap-4">
+                  {['1er', '2do', '3er', 'Final'].map((period, i) => (
+                    <div key={i} className="bg-gray-900/50 rounded-xl p-3 text-center">
+                      <p className="text-sm text-gray-400 mb-1">{period}</p>
+                      <p className={`text-lg font-bold ${
+                        getGradeColor(
+                          i === 0 ? subject.grades.first :
+                          i === 1 ? subject.grades.second :
+                          i === 2 ? subject.grades.third :
+                          subject.grades.final
+                        )
+                      }`}>
+                        {i === 0 ? subject.grades.first.toFixed(1) :
+                         i === 1 ? subject.grades.second.toFixed(1) :
+                         i === 2 ? (subject.grades.third ?? 'N/A') :
+                         subject.grades.final ?? 'N/A'}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
