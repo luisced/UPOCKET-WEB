@@ -8,6 +8,7 @@ import SchedulePage from './pages/SchedulePage';
 import GradesPage from './pages/GradesPage';
 import AttendancePage from './pages/AttendancePage';
 import AttendanceDetailPage from './pages/AttendanceDetailPage';
+import LinksPage from './pages/LinksPage';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/calificaciones" element={<GradesPage />} />
         <Route path="/asistencias" element={<AttendancePage />} />
         <Route path="/asistencias/:id" element={<AttendanceDetailPage />} />
+        <Route path="/links" element={<LinksPage />} />
       </Routes>
     </Router>
   );

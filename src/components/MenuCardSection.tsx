@@ -22,6 +22,7 @@ const MenuCardSection: React.FC = () => {
           title="Otros Links" 
           subtitle="Consulta otros sitios"
           accentColor="cyan"
+          link="/links"
         />
         <MenuCard 
           title="Mis Asistencias" 
