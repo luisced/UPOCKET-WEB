@@ -43,7 +43,6 @@ body {
 }
 
 .menu-card {
-  background-color: var(--card-bg);
   position: relative;
   overflow: hidden;
   transition: transform 0.2s ease, background-color 0.3s ease;
@@ -58,28 +57,29 @@ body {
   border-radius: 50%;
   width: 150px;
   height: 150px;
+  opacity: 0.2;
 }
 
 .accent-pink {
-  background-color: #f48fb1;
+  background-color: #f472b6;
   bottom: -50px;
   right: -50px;
 }
 
-.accent-blue {
-  background-color: #5c6bc0;
+.accent-purple {
+  background-color: #a78bfa;
   top: -50px;
   right: -50px;
 }
 
-.accent-cyan {
-  background-color: #4fc3f7;
+.accent-blue {
+  background-color: #60a5fa;
   bottom: -50px;
   right: -50px;
 }
 
 .accent-orange {
-  background-color: #ffb74d;
+  background-color: #fb923c;
   bottom: -50px;
   right: -50px;
 }
