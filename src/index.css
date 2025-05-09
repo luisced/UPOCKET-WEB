@@ -23,6 +23,7 @@ body {
   background: linear-gradient(to bottom, var(--background-start), var(--background-end));
   color: white;
   min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .next-class-card {
@@ -45,7 +46,7 @@ body {
   background-color: var(--card-bg);
   position: relative;
   overflow: hidden;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 .menu-card:hover {
