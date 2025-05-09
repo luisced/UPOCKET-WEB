@@ -10,7 +10,7 @@ const StatusBar: React.FC = () => {
     <>
       <div className={`flex justify-between items-center w-full py-4 px-6 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'} bg-opacity-40 backdrop-blur-sm rounded-lg`}>
         <div className={`text-xl font-semibold ${theme === 'light' ? 'text-gray-900' : 'text-white/90'}`}>
-          Student Dashboard
+          UPocket Web
         </div>
         
         <button 
