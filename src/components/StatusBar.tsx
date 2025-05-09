@@ -10,11 +10,11 @@ const StatusBar: React.FC = () => {
         <div className="text-xl font-semibold text-white/90">Student Dashboard</div>
         
         <button 
-          className="p-3 bg-gray-700 bg-opacity-40 rounded-full hover:bg-opacity-60 transition-colors"
+          className="p-2 sm:p-3 bg-gray-700 bg-opacity-40 rounded-full hover:bg-opacity-60 transition-colors"
           aria-label="Settings"
           onClick={() => setIsSheetOpen(true)}
         >
-          <Settings size={20} />
+          <Settings className="w-6 h-6 sm:w-5 sm:h-5" />
         </button>
       </div>
 
