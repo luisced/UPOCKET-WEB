@@ -27,7 +27,35 @@ const subjects = [
 const AttendanceDetailPage: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const subject = subjects[Number(id) || 0];
+  const subject = subjects[Number(id) || 0] || null;
+
+  if (!subject) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-[#0f0513] to-[#120821] text-white p-6">
+        <div className="max-w-6xl mx-auto">
+          <header className="flex items-center mb-8">
+            <button 
+              onClick={() => navigate(-1)}
+              className="p-2 rounded-full hover:bg-white/10 transition-colors"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <h1 className="text-2xl font-bold ml-4">Subject Not Found</h1>
+          </header>
+          <div className="bg-gray-800/50 rounded-2xl p-6 text-center">
+            <AlertCircle className="mx-auto mb-4 text-red-500" size={48} />
+            <p className="text-xl mb-4">The requested subject could not be found.</p>
+            <button 
+              onClick={() => navigate(-1)}
+              className="px-4 py-2 bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors"
+            >
+              Go Back
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const attendancePercentage = Math.round(
     ((subject.totalClasses - subject.absences.length) / subject.totalClasses) * 100
