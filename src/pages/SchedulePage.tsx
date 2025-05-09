@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { format, addDays, parseISO } from 'date-fns';
 import { es } from 'date-fns/locale';
 import { ChevronLeft } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 interface ScheduleItem {
   start_time: string;
@@ -18,97 +19,98 @@ interface Schedule {
 
 const scheduleData = {
   "Lunes": [
-                {
-                    "start_time": "08:30",
-                    "end_time": "10:00",
-                    "subject_name": "Antropología Teológica II",
-                    "professor_name": "Lic Carlos Jean",
-                    "classroom": "R 42"
-                },
-                {
-                    "start_time": "10:30",
-                    "end_time": "12:00",
-                    "subject_name": "Filosofía Social",
-                    "professor_name": "Dr Ariadne de Fátima Pérez",
-                    "classroom": "NR 04"
-                },
-                {
-                    "start_time": "14:00",
-                    "end_time": "15:30",
-                    "subject_name": "Ciencia de Datos para Negocios",
-                    "professor_name": "Dr Edgar Avalos",
-                    "classroom": ""
-                }
-            ],
-            "Martes": [
-                {
-                    "start_time": "07:00",
-                    "end_time": "09:00",
-                    "subject_name": "Arquitectura de Computadoras",
-                    "professor_name": "Lic Carlos Fernando Meza",
-                    "classroom": ""
-                },
-                {
-                    "start_time": "17:30",
-                    "end_time": "19:00",
-                    "subject_name": "Teoría de Lenguajes y Programación",
-                    "professor_name": "Dr Félix Orlando Martínez",
-                    "classroom": "NR 06"
-                },
-                {
-                    "start_time": "19:00",
-                    "end_time": "20:30",
-                    "subject_name": "Ecuaciones Diferenciales",
-                    "professor_name": "Dr Yaithd Daniel Olivas",
-                    "classroom": "R 46"
-                }
-            ],
-            "Miércoles": [
-                {
-                    "start_time": "09:00",
-                    "end_time": "10:30",
-                    "subject_name": "Ciencia de Datos para Negocios",
-                    "professor_name": "Dr Edgar Avalos",
-                    "classroom": ""
-                }
-            ],
-            "Jueves": [
-                {
-                    "start_time": "17:30",
-                    "end_time": "19:00",
-                    "subject_name": "Teoría de Lenguajes y Programación",
-                    "professor_name": "Dr Félix Orlando Martínez",
-                    "classroom": "V_LAB_COM2"
-                }
-            ],
-            "Viernes": [
-                {
-                    "start_time": "07:00",
-                    "end_time": "09:00",
-                    "subject_name": "Arquitectura de Computadoras",
-                    "professor_name": "Lic Carlos Fernando Meza",
-                    "classroom": ""
-                },
-                {
-                    "start_time": "10:30",
-                    "end_time": "12:00",
-                    "subject_name": "Filosofía Social",
-                    "professor_name": "Dr Ariadne de Fátima Pérez",
-                    "classroom": "NR 04"
-                },
-                {
-                    "start_time": "19:00",
-                    "end_time": "20:30",
-                    "subject_name": "Ecuaciones Diferenciales",
-                    "professor_name": "Dr Yaithd Daniel Olivas",
-                    "classroom": "R 46"
-                }
-            ]
-        };
+    {
+      "start_time": "08:30",
+      "end_time": "10:00",
+      "subject_name": "Antropología Teológica II",
+      "professor_name": "Lic Carlos Jean",
+      "classroom": "R 42"
+    },
+    {
+      "start_time": "10:30",
+      "end_time": "12:00",
+      "subject_name": "Filosofía Social",
+      "professor_name": "Dr Ariadne de Fátima Pérez",
+      "classroom": "NR 04"
+    },
+    {
+      "start_time": "14:00",
+      "end_time": "15:30",
+      "subject_name": "Ciencia de Datos para Negocios",
+      "professor_name": "Dr Edgar Avalos",
+      "classroom": ""
+    }
+  ],
+  "Martes": [
+    {
+      "start_time": "07:00",
+      "end_time": "09:00",
+      "subject_name": "Arquitectura de Computadoras",
+      "professor_name": "Lic Carlos Fernando Meza",
+      "classroom": ""
+    },
+    {
+      "start_time": "17:30",
+      "end_time": "19:00",
+      "subject_name": "Teoría de Lenguajes y Programación",
+      "professor_name": "Dr Félix Orlando Martínez",
+      "classroom": "NR 06"
+    },
+    {
+      "start_time": "19:00",
+      "end_time": "20:30",
+      "subject_name": "Ecuaciones Diferenciales",
+      "professor_name": "Dr Yaithd Daniel Olivas",
+      "classroom": "R 46"
+    }
+  ],
+  "Miércoles": [
+    {
+      "start_time": "09:00",
+      "end_time": "10:30",
+      "subject_name": "Ciencia de Datos para Negocios",
+      "professor_name": "Dr Edgar Avalos",
+      "classroom": ""
+    }
+  ],
+  "Jueves": [
+    {
+      "start_time": "17:30",
+      "end_time": "19:00",
+      "subject_name": "Teoría de Lenguajes y Programación",
+      "professor_name": "Dr Félix Orlando Martínez",
+      "classroom": "V_LAB_COM2"
+    }
+  ],
+  "Viernes": [
+    {
+      "start_time": "07:00",
+      "end_time": "09:00",
+      "subject_name": "Arquitectura de Computadoras",
+      "professor_name": "Lic Carlos Fernando Meza",
+      "classroom": ""
+    },
+    {
+      "start_time": "10:30",
+      "end_time": "12:00",
+      "subject_name": "Filosofía Social",
+      "professor_name": "Dr Ariadne de Fátima Pérez",
+      "classroom": "NR 04"
+    },
+    {
+      "start_time": "19:00",
+      "end_time": "20:30",
+      "subject_name": "Ecuaciones Diferenciales",
+      "professor_name": "Dr Yaithd Daniel Olivas",
+      "classroom": "R 46"
+    }
+  ]
+};
 
 const SchedulePage: React.FC = () => {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const { theme } = useTheme();
   
   const timeSlots = Array.from({ length: 14 }, (_, i) => {
     const hour = i + 7; // Start from 7:00
@@ -144,14 +146,14 @@ const SchedulePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0f0513] to-[#120821] text-white p-6">
+    <div className={`min-h-screen ${theme === 'light' ? 'bg-gray-50' : 'bg-gradient-to-b from-[#0f0513] to-[#120821]'} ${theme === 'light' ? 'text-gray-900' : 'text-white'} p-6`}>
       <div className="max-w-6xl mx-auto">
         <header className="flex items-center mb-8">
           <button 
             onClick={() => navigate(-1)}
-            className="p-2 rounded-full hover:bg-white/10 transition-colors"
+            className={`p-2 rounded-full ${theme === 'light' ? 'hover:bg-gray-200' : 'hover:bg-white/10'} transition-colors`}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={24} className={theme === 'light' ? 'text-gray-700' : 'text-white'} />
           </button>
           <h1 className="text-2xl font-bold ml-4">Horario</h1>
         </header>
@@ -167,28 +169,32 @@ const SchedulePage: React.FC = () => {
             <button
               key={index}
               className={`flex-shrink-0 w-24 h-24 rounded-2xl flex flex-col items-center justify-center ${
-                index === 0 ? 'bg-blue-500' : 'bg-gray-800/50'
+                index === 0 
+                  ? 'bg-blue-500 text-white' 
+                  : theme === 'light'
+                    ? 'bg-white shadow-md hover:bg-gray-50'
+                    : 'bg-gray-800/50'
               }`}
               onClick={() => setSelectedDate(day.date)}
             >
-              <span className="text-sm">{day.month}</span>
+              <span className={`text-sm ${theme === 'light' && index !== 0 ? 'text-gray-600' : ''}`}>{day.month}</span>
               <span className="text-3xl font-bold">{day.dayNumber}</span>
-              <span className="text-sm">{day.dayName}</span>
+              <span className={`text-sm ${theme === 'light' && index !== 0 ? 'text-gray-600' : ''}`}>{day.dayName}</span>
             </button>
           ))}
         </div>
 
-        <div className="relative overflow-y-auto max-h-[calc(100vh-300px)]">
+        <div className={`relative overflow-y-auto max-h-[calc(100vh-300px)] ${theme === 'light' ? 'bg-white shadow-lg' : 'bg-gray-800/30'} rounded-2xl p-4`}>
           {timeSlots.map((time, i) => (
             <div key={i} className="flex items-center min-h-[100px] relative">
-              <div className="w-16 text-sm text-gray-400">{time}</div>
-              <div className="flex-1 border-t border-gray-800"></div>
+              <div className={`w-16 text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>{time}</div>
+              <div className={`flex-1 border-t ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}></div>
             </div>
           ))}
 
           <div className="absolute top-0 left-16 right-0">
             {days.map((day, dayIndex) => (
-              <div key={dayIndex} className="absolute w-1/5 left-[${dayIndex * 20}%]">
+              <div key={dayIndex} className="absolute w-1/5" style={{ left: `${dayIndex * 20}%` }}>
                 {scheduleData[format(day.date, 'EEEE', { locale: es })]?.map((cls, i) => {
                   const startMinutes = parseInt(cls.start_time.split(':')[0]) * 60 + 
                                      parseInt(cls.start_time.split(':')[1]);
@@ -201,15 +207,15 @@ const SchedulePage: React.FC = () => {
                   return (
                     <div
                       key={i}
-                      className={`absolute rounded-xl p-3 ${getRandomColor(cls.subject_name)} w-[90%]`}
+                      className={`absolute rounded-xl p-3 ${getRandomColor(cls.subject_name)} ${theme === 'light' ? 'bg-opacity-20 text-gray-900' : ''} w-[90%]`}
                       style={{
                         top: `${top}px`,
                         height: `${height}px`,
                       }}
                     >
                       <h3 className="font-semibold text-sm">{cls.subject_name}</h3>
-                      <p className="text-xs opacity-80">{cls.classroom}</p>
-                      <p className="text-xs mt-1">
+                      <p className={`text-xs ${theme === 'light' ? 'text-gray-700' : 'opacity-80'}`}>{cls.classroom}</p>
+                      <p className={`text-xs mt-1 ${theme === 'light' ? 'text-gray-600' : ''}`}>
                         {cls.start_time} - {cls.end_time}
                       </p>
                     </div>
