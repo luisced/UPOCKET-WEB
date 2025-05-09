@@ -27,6 +27,7 @@ const MenuCardSection: React.FC = () => {
           title="Mis Asistencias" 
           subtitle="Consulta tus asistencias y retardos"
           accentColor="orange"
+          link="/asistencias"
         />
       </div>
     </div>

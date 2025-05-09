@@ -6,6 +6,8 @@ import NextClassCard from './components/NextClassCard';
 import MenuCardSection from './components/MenuCardSection';
 import SchedulePage from './pages/SchedulePage';
 import GradesPage from './pages/GradesPage';
+import AttendancePage from './pages/AttendancePage';
+import AttendanceDetailPage from './pages/AttendanceDetailPage';
 
 function App() {
   return (
@@ -35,9 +37,11 @@ function App() {
         } />
         <Route path="/horario" element={<SchedulePage />} />
         <Route path="/calificaciones" element={<GradesPage />} />
+        <Route path="/asistencias" element={<AttendancePage />} />
+        <Route path="/asistencias/:id" element={<AttendanceDetailPage />} />
       </Routes>
     </Router>
   );
 }
 
-export default App
+export default App;
