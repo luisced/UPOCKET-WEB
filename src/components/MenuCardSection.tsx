@@ -10,6 +10,7 @@ const MenuCardSection: React.FC = () => {
           title="Mis Calificaciones" 
           subtitle="Consulta tus calificaciones y tu promedio"
           accentColor="pink"
+          link="/calificaciones"
         />
         <MenuCard 
           title="Mi Horario" 

@@ -5,6 +5,7 @@ import ProfileSection from './components/ProfileSection';
 import NextClassCard from './components/NextClassCard';
 import MenuCardSection from './components/MenuCardSection';
 import SchedulePage from './pages/SchedulePage';
+import GradesPage from './pages/GradesPage';
 
 function App() {
   return (
@@ -33,9 +34,8 @@ function App() {
           </div>
         } />
         <Route path="/horario" element={<SchedulePage />} />
+        <Route path="/calificaciones" element={<GradesPage />} />
       </Routes>
     </Router>
   );
 }
-
-export default App;
