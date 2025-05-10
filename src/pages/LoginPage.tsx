@@ -10,7 +10,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#121212] flex flex-col items-center justify-between p-8 relative overflow-hidden">
+    <div className="min-h-screen bg-[#121212] flex flex-col items-center p-8 relative overflow-hidden">
       {/* Decorative shapes */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/20 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
@@ -18,14 +18,14 @@ const LoginPage: React.FC = () => {
       <div className="absolute bottom-1/4 right-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl transform translate-x-1/2"></div>
       
       {/* Logo */}
-      <div className="w-full max-w-md text-center mt-12">
+      <div className="w-full max-w-md text-center mt-32">
         <h1 className="text-white text-7xl font-bold tracking-tight">
           UPocket<span className="text-blue-500">.</span>
         </h1>
       </div>
 
       {/* Login Button */}
-      <div className="w-full max-w-md space-y-8">
+      <div className="w-full max-w-md flex-1 flex flex-col justify-end mb-20">
         <button
           onClick={handleLogin}
           className="w-full bg-white text-gray-700 py-4 px-6 rounded-full flex items-center justify-center space-x-3 hover:bg-gray-100 transition-colors shadow-lg"
@@ -37,11 +37,9 @@ const LoginPage: React.FC = () => {
           />
           <span className="text-lg font-medium">Iniciar sesión</span>
         </button>
-      </div>
 
-      {/* Terms */}
-      <div className="w-full max-w-md text-center mb-8">
-        <p className="text-gray-400 text-sm px-8">
+        {/* Terms */}
+        <p className="text-gray-400 text-sm text-center mt-8 px-8">
           Al usar UPocket, estás de acuerdo en aceptar los Términos de Uso y la Política de Privacidad.
         </p>
       </div>
