@@ -9,6 +9,7 @@ import GradesPage from './pages/GradesPage';
 import AttendancePage from './pages/AttendancePage';
 import AttendanceDetailPage from './pages/AttendanceDetailPage';
 import LinksPage from './pages/LinksPage';
+import LoginPage from './pages/LoginPage';
 import { ThemeProvider } from './contexts/ThemeContext';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <ThemeProvider>
       <Router>
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/" element={
             <div className="flex flex-col min-h-screen px-8 py-6 max-w-6xl mx-auto">
               <StatusBar />
@@ -49,4 +51,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
